@@ -18,7 +18,7 @@ function propsCount (currentObject) {
 }
 
 function task01 () {
-    let mentor = {
+    const mentor = {
         course: 'JS fundamental',
         duration: 3,
         direction: 'web-development',
@@ -27,7 +27,35 @@ function task01 () {
     console.log(`Properties count is ${res}`);
 }
 
-// 2. Створіть довільний об’єкт, який має 5 полів. Необхідно написати функцію showProps(obj), яка приймає даний об’єкт і виводить список його властивостей записаних в масив. Виведіть також масив значень властивостей об’єкта.
+// 2. Створіть довільний об’єкт, який має 5 полів.
+// Необхідно написати функцію showProps(obj),
+// яка приймає даний об’єкт
+// і виводить список його властивостей записаних в масив.
+// Виведіть також масив значень властивостей об’єкта.
+function showProps (obj) {
+    // First way
+    // console.log(Object.entries(obj).map(prop => prop[0]));
+    // console.log(Object.entries(obj).map(prop => prop[1]));
+
+    // Seconf way
+    // console.log(Object.getOwnPropertyNames(obj));
+
+    // Third way
+    console.log(Object.keys(obj));
+    console.log(Object.values(obj));
+}
+
+function task02 () {
+    const obj = {
+        first: 'first value',
+        second: 'second value',
+        third: 'third value',
+        fourth: 'fourth value',
+        fifth: 'fifth value',
+    };
+
+    showProps(obj);
+}
 
 // 3. Створіть клас Person, в якого конструктор приймає параметри name і surname, а також міститься метод showFullName(), який виводить ім’я і прізвище особи.
 // 	Від класу Person наслідується клас Student, конструктор якого крім name і surname, приймає параметр year (рік вступу до університету).
