@@ -57,14 +57,60 @@ function task02 () {
     showProps(obj);
 }
 
-// 3. Створіть клас Person, в якого конструктор приймає параметри name і surname, а також міститься метод showFullName(), який виводить ім’я і прізвище особи.
-// 	Від класу Person наслідується клас Student, конструктор якого крім name і surname, приймає параметр year (рік вступу до університету).
-// 	В класі Student необхідно перевизначити метод showFullName(midleName), щоб виводилося не лише ім’я, прізвище, але і по-батькові (midleName) студента.
-// 	Також в класі Student необхідно реалізувати метод showCourse(), який виводитиме поточний курс студента (від 1 до 6). Значення курсу визначатиметься як різниця поточного року (визначити самостійно) і року вступу до ВУЗу year.
-// 	Приклад результату:
+// 3. Створіть клас Person, в якого конструктор приймає параметри name і surname,
+// а також міститься метод showFullName(), який виводить ім’я і прізвище особи.
+//
+// Від класу Person наслідується клас Student,
+// конструктор якого крім name і surname, приймає параметр year (рік вступу до університету).
+// В класі Student необхідно перевизначити метод showFullName(middleName),
+// щоб виводилося не лише ім’я, прізвище, але і по-батькові (middleName) студента.
+//
+// Також в класі Student необхідно реалізувати метод showCourse(),
+// який виводитиме поточний курс студента (від 1 до 6).
+// Значення курсу визначатиметься як різниця поточного року (визначити самостійно) і року вступу до ВУЗу year.
+//
+// Приклад результату:
 // const stud1 = new Student("Petro", "Petrenko", 2015);
 // console.log(stud1.showFullName("Petrovych")); // Petrenko Petro Petrovych
 // console.log("Current course: " + stud1.showCourse()); //Current course: 6
+class Person {
+    showFullName () {
+        console.log(`${this.name} ${this.surname}`);
+    }
+
+    constructor (name, surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+}
+
+class Student extends Person {
+    showFullName (middleName) {
+        console.log(`${this.name} ${this.surname} ${middleName}`);
+    }
+
+    showCourse () {
+        const currentDate = new Date();
+        const course = currentDate.getFullYear() - this.year;
+        console.log(`course: ${course}`);
+    }
+
+    constructor (name, surname, year) {
+        super(name, surname);
+        this.year = year;
+    }
+}
+
+function task03 () {
+    const name = document.getElementById('nameT03').value;
+    const surname = document.getElementById('surnameT03').value;
+    const middleName = document.getElementById('middleNameT03').value;
+    const year = document.getElementById('yearT03').value;
+
+    const student = new Student(name, surname, year);
+    student.showFullName(middleName);
+    student.showCourse();
+}
 
 // 4. Створіть клас Worker який буде мати конструктор, який приймає наступні властивості: fullName (ім’я і прізвище), dayRate (ставка за день роботи), workingDays (кількість відпрацьованих днів).
 //        1) клас повинен мати метод showSalary(), який буде виводити зарплату працівника. Зарплата - це добуток ставки dayRate на кількість відпрацьованих днів workingDays.
