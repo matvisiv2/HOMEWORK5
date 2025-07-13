@@ -112,15 +112,20 @@ function task03 () {
     student.showCourse();
 }
 
-// 4. Створіть клас Worker який буде мати конструктор, який приймає наступні властивості: fullName (ім’я і прізвище), dayRate (ставка за день роботи), workingDays (кількість відпрацьованих днів).
-//        1) клас повинен мати метод showSalary(), який буде виводити зарплату працівника. Зарплата - це добуток ставки dayRate на кількість відпрацьованих днів workingDays.
-//        2) додати приватне поле experience і присвоїти йому значення 1.2 і використовувати його як додатковий множник при визначенні зарплати – створити метод showSalaryWithExperience(). Вивести значення зарплати з цим коефіцієнтом.
+// 4. Створіть клас Worker який буде мати конструктор,
+// який приймає наступні властивості: fullName (ім’я і прізвище), dayRate (ставка за день роботи), workingDays (кількість відпрацьованих днів).
+//        1) клас повинен мати метод showSalary(), який буде виводити зарплату працівника.
+//              Зарплата - це добуток ставки dayRate на кількість відпрацьованих днів workingDays.
+//        2) додати приватне поле experience і присвоїти йому значення 1.2 і використовувати його як додатковий множник
+//              при визначенні зарплати – створити метод showSalaryWithExperience(). Вивести значення зарплати з цим коефіцієнтом.
 //        3) додати гетери і сетери для поля experience. Встановити значення experience = 1.5 і вивести його на екран.
 // 	4) Вивести значення зарплати з новим experience.
-// 	5) Створити кілька екземплярів класу (працівників) з різними зарплатами, як показано в прикладі нижче. Посортувати зарплату працівників із найбільшим experience по зростанню і вивести результат в форматі:   worker_fullName: salary_value
+// 	5) Створити кілька екземплярів класу (працівників) з різними зарплатами, як показано в прикладі нижче.
+//      Посортувати зарплату працівників із найбільшим experience по зростанню і вивести результат в форматі:
+//             worker_fullName: salary_value
 // 	6) Реалізувати динамічне сортування для будь-кої кількості працівників-екземплярів класу Worker.
 
-// Example usage:
+/* // Example usage:
 // let worker1 = new Worker("John Johnson", 20, 23);
 // console.log(worker1.fullName);
 // worker1.showSalary();
@@ -160,6 +165,39 @@ function task03 () {
 // John Johnson: 690
 // Andy Ander: 1000.5
 // Tom Tomson: 1584
+*/
+
+class Worker {
+    fullName;
+    dayRate;
+    workingDays;
+    #experience;
+
+    get experience () {
+        return this.#experience;
+    }
+
+    set experience (value) {
+        this.#experience = value;
+    }
+
+    showSalary = () => {
+        console.log(`Salary: ${this.dayRate * this.workingDays}`);
+    };
+
+    showSalaryWithExperience = () => {
+        console.log(
+            `Salary: ${this.dayRate * this.workingDays * this.#experience}`
+        );
+    };
+
+    constructor (fullName, dayRate, workingDays) {
+        this.fullName = fullName;
+        this.dayRate = dayRate;
+        this.workingDays = workingDays;
+        this.#experience = 1.2;
+    }
+}
 
 // 5. Створіть батьківський клас GeometricFigure, який має порожній метод для визначення площі getArea() та метод toString() для виведення назви класу.
 // Створіть 3 класи нащадки Triangle, Square і Circle, які наслідуються від класу GeometricFigure. Кожен з дочірніх класів має свою реалізацію методу getArea(), для визначення площі фігури. В конструкторах дочірніх класів передбачити властивості необхідні для визначення площі фігури, наприклад для кола - радіус r.
