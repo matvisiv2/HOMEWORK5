@@ -234,10 +234,25 @@ function task04() {
     res.forEach(worker => console.log(`${worker.fullName}: ${worker.salaryWithExperience()}`));
 }
 
-// 5. Створіть батьківський клас GeometricFigure, який має порожній метод для визначення площі getArea() та метод toString() для виведення назви класу.
-// Створіть 3 класи нащадки Triangle, Square і Circle, які наслідуються від класу GeometricFigure. Кожен з дочірніх класів має свою реалізацію методу getArea(), для визначення площі фігури. В конструкторах дочірніх класів передбачити властивості необхідні для визначення площі фігури, наприклад для кола - радіус r.
-// 	Створіть зовнішню функцію handleFigures(figures), яка прийматиме масив об’єктів дочірніх класів figures, перевірятиме чи об’єкт належить батьківському класу з урахуванням наслідування, виводитиме назву створеного об’єкту відповідної фігури, розраховану площу фігури та сумарну площу всіх фігур. Для реалізації функції можете використати метод reduce().
-// 	 class GeometricFigure {
+// 5. Створіть батьківський клас GeometricFigure,
+//      який має порожній метод для визначення площі getArea()
+//      та метод toString() для виведення назви класу.
+
+/**/// Створіть 3 класи нащадки Triangle, Square і Circle,
+//      які наслідуються від класу GeometricFigure.
+//      Кожен з дочірніх класів має свою реалізацію методу getArea(), для визначення площі фігури.
+//      В конструкторах дочірніх класів передбачити властивості необхідні для визначення площі фігури,
+//          наприклад для кола - радіус r.
+
+/**/// 	Створіть зовнішню функцію handleFigures(figures),
+//      яка прийматиме масив об’єктів дочірніх класів figures,
+//      перевірятиме чи об’єкт належить батьківському класу з урахуванням наслідування,
+//      виводитиме назву створеного об’єкту відповідної фігури,
+//      розраховану площу фігури
+//      та сумарну площу всіх фігур.
+//      Для реалізації функції можете використати метод reduce().
+
+/**/// class GeometricFigure {
 // 			getArea() {
 // 	return 0;
 // }
@@ -255,3 +270,75 @@ function task04() {
 // Geometric figure: Square - area: 49
 // Geometric figure: Circle - area: 78.53981633974483
 // 137.53981633974485 // total area
+
+class GeometricFigure {
+    getArea() {
+        return 0;
+    }
+
+    toString() {
+        return this.constructor.name;
+    }
+}
+
+class Triangle extends GeometricFigure {
+    getArea() {
+        // For simple triangle
+        // const p = (this.a + this.b + this.c) / 2;
+        // return Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+
+        // For right triangle
+        return this.a * this.b / 2;
+    }
+
+    constructor(a = 1, b = 1, c = 1) {
+        super();
+
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+}
+
+class Square extends GeometricFigure {
+    getArea() {
+        return this.a ** 2;
+    }
+
+    constructor(a = 1) {
+        super();
+
+        this.a = a;
+    }
+}
+
+class Circle extends GeometricFigure {
+    getArea() {
+        return Math.PI * (this.r ** 2);
+    }
+
+    constructor(r = 1) {
+        super();
+
+        this.r = r;
+    }
+}
+
+function handleFigures(figures = []) {
+    figures.forEach(figure => {
+        console.log(`Geometric figure: ${figure.toString()}  - area: ${figure.getArea()}`);
+    });
+
+    const initValue = 0;
+    const totalArea = figures.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.getArea(),
+        initValue
+    );
+
+    return totalArea;
+}
+
+function task05() {
+    const figures = [new Triangle(4, 5), new Square(7), new Circle(5)];
+    console.log(handleFigures(figures));
+}
