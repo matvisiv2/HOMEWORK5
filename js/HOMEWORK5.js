@@ -9,6 +9,7 @@
 //         };
 // Результат має бути 3.
 // propsCount(mentor);  // 3
+
 function propsCount(currentObject) {
     let res = 0;
     for (let i in currentObject) {
@@ -32,6 +33,7 @@ function task01() {
 // яка приймає даний об’єкт
 // і виводить список його властивостей записаних в масив.
 // Виведіть також масив значень властивостей об’єкта.
+
 function showProps(obj) {
     // First way
     // console.log(Object.entries(obj).map(prop => prop[0]));
@@ -73,6 +75,7 @@ function task02() {
 // const stud1 = new Student("Petro", "Petrenko", 2015);
 // console.log(stud1.showFullName("Petrovych")); // Petrenko Petro Petrovych
 // console.log("Current course: " + stud1.showCourse()); //Current course: 6
+
 class Person {
     showFullName() {
         console.log(`${this.name} ${this.surname}`);
@@ -195,7 +198,7 @@ class Worker {
         return this.dayRate * this.workingDays * this.#experience;
     }
 
-    constructor(fullName, dayRate, workingDays) {
+    constructor(fullName = "", dayRate = 0, workingDays = 0) {
         this.fullName = fullName;
         this.dayRate = dayRate;
         this.workingDays = workingDays;
@@ -325,20 +328,23 @@ class Circle extends GeometricFigure {
 }
 
 function handleFigures(figures = []) {
-    figures.forEach(figure => {
-        console.log(`Geometric figure: ${figure.toString()}  - area: ${figure.getArea()}`);
-    });
 
-    const initValue = 0;
     const totalArea = figures.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.getArea(),
-        initValue
+        (total, figure) => {
+            if (figure instanceof GeometricFigure) {
+                console.log(`Geometric figure: ${figure.toString()}  - area: ${figure.getArea()}`);
+                return total + figure.getArea();
+            }
+
+            return total;
+        },
+        0
     );
 
     return totalArea;
 }
 
 function task05() {
-    const figures = [new Triangle(4, 5), new Square(7), new Circle(5)];
+    const figures = [new Triangle(4, 5), new Worker(), new Square(7), new Circle(5)];
     console.log(handleFigures(figures));
 }
