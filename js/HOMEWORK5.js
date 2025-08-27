@@ -9,7 +9,7 @@
 //         };
 // Результат має бути 3.
 // propsCount(mentor);  // 3
-function propsCount (currentObject) {
+function propsCount(currentObject) {
     let res = 0;
     for (let i in currentObject) {
         res++;
@@ -17,7 +17,7 @@ function propsCount (currentObject) {
     return res;
 }
 
-function task01 () {
+function task01() {
     const mentor = {
         course: 'JS fundamental',
         duration: 3,
@@ -32,7 +32,7 @@ function task01 () {
 // яка приймає даний об’єкт
 // і виводить список його властивостей записаних в масив.
 // Виведіть також масив значень властивостей об’єкта.
-function showProps (obj) {
+function showProps(obj) {
     // First way
     // console.log(Object.entries(obj).map(prop => prop[0]));
     // console.log(Object.entries(obj).map(prop => prop[1]));
@@ -45,7 +45,7 @@ function showProps (obj) {
     console.log(Object.values(obj));
 }
 
-function task02 () {
+function task02() {
     const obj = {
         first: 'first value',
         second: 'second value',
@@ -74,34 +74,34 @@ function task02 () {
 // console.log(stud1.showFullName("Petrovych")); // Petrenko Petro Petrovych
 // console.log("Current course: " + stud1.showCourse()); //Current course: 6
 class Person {
-    showFullName () {
+    showFullName() {
         console.log(`${this.name} ${this.surname}`);
     }
 
-    constructor (name, surname) {
+    constructor(name, surname) {
         this.name = name;
         this.surname = surname;
     }
 }
 
 class Student extends Person {
-    showFullName (middleName) {
+    showFullName(middleName) {
         console.log(`${this.name} ${this.surname} ${middleName}`);
     }
 
-    showCourse () {
+    showCourse() {
         const currentDate = new Date();
         const course = currentDate.getFullYear() - this.year;
         console.log(`course: ${course}`);
     }
 
-    constructor (name, surname, year) {
+    constructor(name, surname, year) {
         super(name, surname);
         this.year = year;
     }
 }
 
-function task03 () {
+function task03() {
     const name = document.getElementById('nameT03').value;
     const surname = document.getElementById('surnameT03').value;
     const middleName = document.getElementById('middleNameT03').value;
@@ -171,13 +171,13 @@ class Worker {
     fullName;
     dayRate;
     workingDays;
-    #experience;
+    #experience = 1.2;
 
-    get experience () {
+    get experience() {
         return this.#experience;
     }
 
-    set experience (value) {
+    set experience(value) {
         this.#experience = value;
     }
 
@@ -187,16 +187,51 @@ class Worker {
 
     showSalaryWithExperience = () => {
         console.log(
-            `Salary: ${this.dayRate * this.workingDays * this.#experience}`
+            `Salary with experience: ${this.dayRate * this.workingDays * this.#experience}`
         );
     };
 
-    constructor (fullName, dayRate, workingDays) {
+    salaryWithExperience = () => {
+        return this.dayRate * this.workingDays * this.#experience;
+    }
+
+    constructor(fullName, dayRate, workingDays) {
         this.fullName = fullName;
         this.dayRate = dayRate;
         this.workingDays = workingDays;
-        this.#experience = 1.2;
     }
+}
+
+function task04() {
+    let worker1 = new Worker("John Johnson", 20, 23);
+    console.log(worker1.fullName);
+    worker1.showSalary();
+    worker1.showSalaryWithExperience();
+    worker1.experience = 1.5;
+    console.log("New experience: " + worker1.experience);
+    worker1.showSalaryWithExperience();
+
+    let worker2 = new Worker("Tom Tomson", 48, 22);
+    console.log(worker2.fullName);
+    worker2.showSalary();
+    worker2.showSalaryWithExperience();
+    worker2.experience = 1.5;
+    console.log("New experience: " + worker2.experience);
+    worker2.showSalaryWithExperience();
+
+    let worker3 = new Worker("Andy Ander", 29, 23);
+    console.log(worker3.fullName);
+    worker3.showSalary();
+    worker3.showSalaryWithExperience();
+    worker3.experience = 1.5;
+    console.log("New experience: " + worker3.experience);
+    worker3.showSalaryWithExperience();
+
+    const res = [worker1, worker2, worker3]
+        .sort((a, b) => a.salaryWithExperience() - b.salaryWithExperience());
+
+    console.log('Sorted salary:');
+    res.forEach(worker => console.log(`${worker.fullName}: ${worker.salaryWithExperience()}`));
 }
 
 // 5. Створіть батьківський клас GeometricFigure, який має порожній метод для визначення площі getArea() та метод toString() для виведення назви класу.
